@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="battlens">	
+<insert id="insertBattle" parameterType="battle">
+<selectKey keyProperty="battleNo" order="BEFORE" resultType="integer">
+			select nvl(max(battleNo), 0) + 1 battleNo from battle
+		</selectKey>
+insert into battle values(#{battleNo},#{stage},#{playerNo},#{monsterNo})
+</insert>
+<select id="selectBattle" parameterType="battle" resultType="battle">
+select * from battle where battleNo=(select max(battleNo) from battle where playerNo=#{playerNo} and monsterNo=#{monsterNo} and stage=1)
+</select>
+<update id="updateBattle" parameterType="battle">
+update battle set stage=#{stage} where battleNo=#{battleNo}
+</update>
+<select id="selectBattleNo" parameterType="integer" resultType="battle">
+select * from battle where battleNo=#{battleNo}
+</select>
+</mapper>

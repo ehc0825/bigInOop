@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="recordns">	
+<insert id="insertRecord" parameterType="record">
+<selectKey keyProperty="recordNo" order="BEFORE" resultType="integer">
+			select nvl(max(recordNo), 0) + 1 recordNo from record
+		</selectKey>
+insert into record values(#{recordNo},#{stage},#{nick},sysdate)
+</insert>
+<select id="selectRecord" resultType="record">
+select * from (select rowNum rn, a.* from(select * from record order by stage desc,endTime )a) where rn between 1 and 10
+</select>
+</mapper>

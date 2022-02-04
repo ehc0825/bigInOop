@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="monsterns">	
+<insert id="insertMonster" parameterType="monster">
+<selectKey keyProperty="monsterNo" order="BEFORE" resultType="integer">
+			select nvl(max(monsterNo), 0) + 1 monsterNo from monster
+		</selectKey>
+insert into monster values(#{monsterNo},#{monsterNAME},#{tribe},#{lv},#{hp},#{mp},#{atk},#{atkSpeed},#{sheeld},#{dex})
+</insert>
+<select id="selectMon" parameterType="monster" resultType="monster">
+select * from monster where monsterNo=(select max(monsterNo) from monster  where monsterName=#{monsterNAME} and tribe=#{tribe} and lv=#{lv} and atk=#{atk})
+</select>
+<select id="selectMonNo" parameterType="integer" resultType="monster">
+select * from monster where monsterNo=#{monsterNo}
+</select>
+</mapper>

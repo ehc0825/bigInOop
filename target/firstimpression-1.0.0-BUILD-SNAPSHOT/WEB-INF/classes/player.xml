@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="playerns">	
+<insert id="insert" parameterType="player">
+<selectKey keyProperty="chatRoompk" order="BEFORE" resultType="integer">
+			select nvl(max(playerNo), 0) + 1 playerNo from player
+		</selectKey>
+insert into player values(#{playerNo},#{nick},#{tribe},1,#{hp},#{mp},#{atk},#{sheeld},#{dex},sysdate,'n',0,#{itemNo})
+</insert>
+<select id="select" parameterType="string" resultType="player">
+select * from player where nick=#{nick} and startTime=(select  max(startTime)  from player where nick=#{nick})
+</select>
+</mapper>

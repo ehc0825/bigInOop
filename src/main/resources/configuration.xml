@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<typeAliases>
+<typeAlias alias="battle" type="com.hc.MirrorBT.model.Battle"/>
+<typeAlias alias="item" type="com.hc.MirrorBT.model.Item"/>
+<typeAlias alias="monster" type="com.hc.MirrorBT.model.Monster"/>
+<typeAlias alias="player" type="com.hc.MirrorBT.model.Player"/>
+<typeAlias alias="record" type="com.hc.MirrorBT.model.Record"/>
+<typeAlias alias="skill" type="com.hc.MirrorBT.model.Skill"/>
+</typeAliases>
+<mappers>
+<mapper resource="battle.xml"/>
+<mapper resource="item.xml"/>
+<mapper resource="monster.xml"/>
+<mapper resource="player.xml"/>
+<mapper resource="record.xml"/>
+<mapper resource="skill.xml"/>
+</mappers>
+</configuration>
